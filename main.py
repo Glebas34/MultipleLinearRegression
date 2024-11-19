@@ -41,7 +41,7 @@ def check_multicollinearity(X):
         for j in range(i + 1, len(corr_matrix)):
             print(f"Корреляция между {corr_matrix.index[i]} и {corr_matrix.columns[j]}: {corr_matrix.iloc[i, j]:.4f}")
 
-def evaluate_model(X, y):
+def evaluate_model(X, y, alpha):
     """
     Оценивает модель.
     """
@@ -55,7 +55,7 @@ def evaluate_model(X, y):
     f_p_value = model.f_pvalue
     
     print(f"R^2: {r2:.2f}, F-статистика: {f_stat:.2f}, p-значение F-теста: {f_p_value:.2f}")
-    if f_p_value < 0.05:
+    if f_p_value < alpha:
         print("Модель адекватна (статистически значима).")
     else:
         print("Модель неадекватна.")
@@ -97,7 +97,7 @@ X_selected = analyze_factors(X, y)
 check_multicollinearity(X_selected)
 
 # Оценка модели
-model = evaluate_model(X_selected, y)
+model = evaluate_model(X_selected, y, alpha)
 
 # Предсказания:
 new_data_file = 'data_for_prediction.csv'
