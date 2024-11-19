@@ -81,7 +81,7 @@ def predict_new_values(model, new_data_file):
 
 selected_factors = ''
 
-# Ввод данных
+# Считывание данных
 input_file = 'learning_data.csv'
 data = read_data(input_file)
 
@@ -89,8 +89,10 @@ data = read_data(input_file)
 y = data['y']
 X = data.drop(columns=['y'])
 
-# Анализ факторов
+# Ввод уровня значимости
 alpha = float(input("Введите уровень значимости (например, 0.05): "))
+
+# Анализ факторов
 X_selected = analyze_factors(X, y)
 
 # Проверка на мультиколлинеарность
